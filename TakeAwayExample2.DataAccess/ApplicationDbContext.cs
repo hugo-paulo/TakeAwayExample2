@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace TakeAwayExample2.Data
+namespace TakeAwayExample2.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext
     {

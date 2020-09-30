@@ -15,4 +15,9 @@
     <PackageReference Include="Stripe.net" Version="39.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TakeAwayExample2.DataAccess\TakeAwayExample2.DataAccess.csproj" />
+    <ProjectReference Include="..\TakeAwayExample2.Models\TakeAwayExample2.Models.csproj" />
+  </ItemGroup>
+
 </Project>
