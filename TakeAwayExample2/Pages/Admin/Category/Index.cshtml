@@ -1,0 +1,35 @@
+﻿@page
+@model TakeAwayExample2.Pages.Admin.Category.IndexModel
+
+<div class="border container custom-container">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary align-middle">Category List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <!--Upset == update and insert common name-->
+            <a asp-page="Upsert" class="btn btn-dark text-white">
+                <!--Note i tag is for icons, the class is from font awesome need ?register?-->
+                <i class="fas fa-plus"></i> &nbsp; Create New
+            </a>
+        </div>
+    </div>
+
+    <br />
+    <div class="table-responsive">
+        <table id="DT_load" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Display Order</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/js/category.js"></script>
+}

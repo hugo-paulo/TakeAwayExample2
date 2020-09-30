@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Adim\" />
+    <Folder Include="Pages\Admin\FoodType\" />
+    <Folder Include="Pages\Admin\MenuItem\" />
+    <Folder Include="Pages\Admin\User\" />
     <Folder Include="Pages\Customer\Cart\" />
     <Folder Include="Pages\Customer\Home\" />
   </ItemGroup>

@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TakeAwayExample2.DataAccess;
+using TakeAwayExample2.DataAccess.Repository.IRepository;
+using TakeAwayExample2.DataAccess.Repository;
 
 namespace TakeAwayExample2
 {
@@ -32,6 +34,8 @@ namespace TakeAwayExample2
                     Configuration.GetConnectionString("TakeAwayDBConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);

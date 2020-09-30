@@ -50,7 +50,7 @@ namespace TakeAwayExample2.DataAccess.Repository
                 return orderBy(query).ToList();
             }
 
-            return orderBy(query).ToList();
+            return query.ToList();
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
