@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TakeAwayExample2.Models;
 
 namespace TakeAwayExample2.DataAccess
 {
@@ -12,5 +13,7 @@ namespace TakeAwayExample2.DataAccess
             : base(options)
         {
         }
+
+        public DbSet<Category> Category { get; set; }
     }
 }

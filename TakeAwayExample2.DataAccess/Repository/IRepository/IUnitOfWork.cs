@@ -4,7 +4,10 @@ using System.Text;
 
 namespace TakeAwayExample2.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
+        ICategoryRepository Category { get; }
+
+        void Save();
     }
 }
