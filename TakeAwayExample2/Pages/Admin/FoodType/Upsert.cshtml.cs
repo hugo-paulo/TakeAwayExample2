@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using TakeAwayExample2.DataAccess.Repository.IRepository;
 
-namespace TakeAwayExample2.Pages.Admin.Category
+namespace TakeAwayExample2.Pages.Admin.FoodType
 {
     public class UpsertModel : PageModel
     {
@@ -19,17 +18,17 @@ namespace TakeAwayExample2.Pages.Admin.Category
         }
 
         [BindProperty]
-        public Models.Category CategoryObj { get; set; }
+        public Models.FoodType FoodTypeObj { get; set; }
 
         public IActionResult OnGet(int? id)
         {
-            CategoryObj = new Models.Category();
+            FoodTypeObj = new Models.FoodType();
 
             if (id != null)
             {
-                CategoryObj = _unitOfWork.Category.GetFirstOrDefault(c => c.CategoryID == id);
+                FoodTypeObj = _unitOfWork.FoodType.GetFirstOrDefault(f => f.FoodTypeID == id);
 
-                if (CategoryObj == null)
+                if (FoodTypeObj == null)
                 {
                     return NotFound();
                 }
@@ -38,19 +37,19 @@ namespace TakeAwayExample2.Pages.Admin.Category
             return Page();
         }
 
-        public IActionResult OnPost(Models.Category CategoryObj)
+        public IActionResult OnPost(Models.FoodType FoodTypeObj)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            else if(CategoryObj.CategoryID == 0)
+            else if (FoodTypeObj.FoodTypeID == 0)
             {
-                _unitOfWork.Category.CreateItem(CategoryObj);
+                _unitOfWork.FoodType.CreateItem(FoodTypeObj);
             }
             else
             {
-                _unitOfWork.Category.UpdateItem(CategoryObj);
+                _unitOfWork.FoodType.UpdateItem(FoodTypeObj);
             }
 
             _unitOfWork.Save();

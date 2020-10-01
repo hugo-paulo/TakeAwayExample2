@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TakeAwayExample2.DataAccess.Repository.IRepository;
+using TakeAwayExample2.Models;
 
 namespace TakeAwayExample2.DataAccess.Repository
 {
@@ -13,9 +14,11 @@ namespace TakeAwayExample2.DataAccess.Repository
         {
             _ctx = ctx;
             Category = new CategoryRepository(_ctx);
+            FoodType = new FoodTypeRepository(_ctx);
         }
 
         public ICategoryRepository Category { get; private set; }
+        public IFoodTypeRepository FoodType { get; private set; }
 
         public void Dispose()
         {

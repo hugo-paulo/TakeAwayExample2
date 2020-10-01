@@ -25,6 +25,6 @@ namespace TakeAwayExample2.DataAccess.Repository.IRepository
 
         void Remove(int id);
 
-        void Remove(T entity);
+        void DeleteItem(T entity);
     }
 }

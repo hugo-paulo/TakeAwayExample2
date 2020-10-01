@@ -18,6 +18,7 @@ namespace TakeAwayExample2.Models
         [MaxLength(100)]
         public string CategoryName { get; set; }
 
+        [Required]
         [Display(Name = "Display Order")]
         public int DisplayOrder { get; set; }
     }

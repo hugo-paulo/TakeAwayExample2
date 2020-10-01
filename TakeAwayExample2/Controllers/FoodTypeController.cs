@@ -10,11 +10,11 @@ namespace TakeAwayExample2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : Controller
+    public class FoodTypeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(IUnitOfWork unitOfWork)
+        public FoodTypeController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -22,20 +22,20 @@ namespace TakeAwayExample2.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.Category.GetAll() });
+            return Json(new { data = _unitOfWork.FoodType.GetAll() });
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var obj = _unitOfWork.Category.GetFirstOrDefault(c => c.CategoryID == id);
+            var obj = _unitOfWork.FoodType.GetFirstOrDefault(f => f.FoodTypeID == id);
 
             if (obj == null)
             {
                 return Json(new { success = false, message = "Error occured while deleting" });
             }
 
-            _unitOfWork.Category.DeleteItem(obj);
+            _unitOfWork.FoodType.DeleteItem(obj);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Item deleted successfully" });

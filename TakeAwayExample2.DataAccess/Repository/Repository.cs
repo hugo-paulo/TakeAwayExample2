@@ -85,10 +85,10 @@ namespace TakeAwayExample2.DataAccess.Repository
         {
             T entityToRemove = _dbSet.Find(id);
             //Good use of function overloading (convert the argument and call the generic function)
-            Remove(entityToRemove);
+            DeleteItem(entityToRemove);
         }
 
-        public void Remove(T entity)
+        public void DeleteItem(T entity)
         {
             _dbSet.Remove(entity);
         }

@@ -1,0 +1,51 @@
+﻿@page
+@model TakeAwayExample2.Pages.Admin.FoodType.UpsertModel
+
+<form method="post" asp-action="Upsert">
+    <div class="container">
+        <div class="row px-2 mx-2 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--Needed for distinguishing between an update and a create-->
+            @if (Model.FoodTypeObj.FoodTypeID != 0)
+            {
+                //Executes when doing update, stores the id in a hidden field
+                <input type="hidden" asp-for="FoodTypeObj.FoodTypeID" />
+            }
+
+            <div class="col-12 px-3">
+                <h2 class="text-primary">@(Model.FoodTypeObj.FoodTypeID != 0 ? "Update" : "Create" ) Food Type</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="FoodTypeObj.FoodTypeName"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="FoodTypeObj.FoodTypeName" />
+                        <span class="text-danger" asp-validation-for="FoodTypeObj.FoodTypeName"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                @if (Model.FoodTypeObj.FoodTypeID != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                }
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-dark text-white form-control">Return</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
