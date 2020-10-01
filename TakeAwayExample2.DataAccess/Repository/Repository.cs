@@ -20,7 +20,7 @@ namespace TakeAwayExample2.DataAccess.Repository
             this._dbSet = context.Set<T>();
         }
 
-        public void Add(T entity)
+        public void CreateItem(T entity)
         {
             _dbSet.Add(entity);
         }

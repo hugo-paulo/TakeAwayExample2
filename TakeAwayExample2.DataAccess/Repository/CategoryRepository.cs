@@ -26,7 +26,7 @@ namespace TakeAwayExample2.DataAccess.Repository
             });
         }
 
-        public void Update(Category category)
+        public void UpdateItem(Category category)
         {
             var obj = _ctx.Category.FirstOrDefault(c => c.CategoryID == category.CategoryID);
 

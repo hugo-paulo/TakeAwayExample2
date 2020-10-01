@@ -1,0 +1,60 @@
+﻿@page
+@model TakeAwayExample2.Pages.Admin.Category.UpsertModel
+
+<form method="post" asp-action="Upsert">
+    <div class="container">
+        <div class="row px-2 mx-2 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--Needed for distinguishing between an update and a create-->
+            @if (Model.CategoryObj.CategoryID != 0)
+            {
+                //Executes when doing update, stores the id in a hidden field
+                <input type="hidden" asp-for="CategoryObj.CategoryID" />
+            }
+
+            <div class="col-12 px-3">
+                <h2 class="text-primary">@(Model.CategoryObj.CategoryID != 0 ? "Update" : "Create" ) Category</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="CategoryObj.CategoryName"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="CategoryObj.CategoryName" />
+                        <span class="text-danger" asp-validation-for="CategoryObj.CategoryName"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="CategoryObj.DisplayOrder"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="CategoryObj.DisplayOrder" />
+                        <span class="text-danger" asp-validation-for="CategoryObj.DisplayOrder"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                @if (Model.CategoryObj.CategoryID != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary text-white form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary text-white form-control">Create</button>
+                                }
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-dark text-white form-control">Return</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

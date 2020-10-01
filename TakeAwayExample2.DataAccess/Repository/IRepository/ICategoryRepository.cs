@@ -10,6 +10,6 @@ namespace TakeAwayExample2.DataAccess.Repository.IRepository
     {
         IEnumerable<SelectListItem> GetCategoryListForDropDown();
 
-        void Update(Category category);
+        void UpdateItem(Category category);
     }
 }
