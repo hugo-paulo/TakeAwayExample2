@@ -21,7 +21,7 @@ namespace TakeAwayExample2.DataAccess.Repository.IRepository
             string includedProperties = null
             );
 
-        void CreateItem(T entity);
+        void AddItem(T entity);
 
         void Remove(int id);
 

@@ -15,10 +15,12 @@ namespace TakeAwayExample2.DataAccess.Repository
             _ctx = ctx;
             Category = new CategoryRepository(_ctx);
             FoodType = new FoodTypeRepository(_ctx);
+            MenuItem = new MenuItemRepository(_ctx);
         }
 
         public ICategoryRepository Category { get; private set; }
         public IFoodTypeRepository FoodType { get; private set; }
+        public IMenuItemRepository MenuItem { get; private set; }
 
         public void Dispose()
         {

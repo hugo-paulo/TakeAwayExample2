@@ -19,10 +19,10 @@ namespace TakeAwayExample2.DataAccess.Repository
 
         public IEnumerable<SelectListItem> GetFoodTypeListForDropDown()
         {
-            return _ctx.FoodType.Select(c => new SelectListItem()
+            return _ctx.FoodType.Select(f => new SelectListItem()
             {
-                Text = c.FoodTypeName,
-                Value = c.FoodTypeID.ToString()
+                Text = f.FoodTypeName,
+                Value = f.FoodTypeID.ToString()
             });
         }
 

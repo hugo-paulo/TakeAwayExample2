@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using TakeAwayExample2.DataAccess;
 using TakeAwayExample2.DataAccess.Repository.IRepository;
 using TakeAwayExample2.DataAccess.Repository;
+using System.Globalization;
 
 namespace TakeAwayExample2
 {
@@ -49,6 +50,13 @@ namespace TakeAwayExample2
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*This is to make the price input work correctly with decimal inputs*/
+            var cultureInfo = new CultureInfo("en-US"); //For RSA ("en-ZA")
+            cultureInfo.NumberFormat.NumberGroupSeparator = "."; //can also use ","
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
