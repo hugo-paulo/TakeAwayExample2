@@ -37,7 +37,7 @@
                         <label asp-for="MenuItemObj.MenuItem.MenuItemImage"></label>
                     </div>
                     <div class="col-9">
-                        <input type="file" class="form-control" name="files" id="uploadBox" />
+                        <input asp-for="MenuItemObj.MenuItem.MenuItemImage" type="file" class="form-control" name="files" id="uploadBox" />
                     </div>
                 </div>
                 <div class="form-group row">

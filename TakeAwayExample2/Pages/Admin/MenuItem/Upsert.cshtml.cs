@@ -96,7 +96,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
 
                     var imagePath = Path.Combine(webRootPath, obj.MenuItemImage.TrimStart('\\'));
 
-                    //Remove the original 
+                    //Remove file if exists
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);

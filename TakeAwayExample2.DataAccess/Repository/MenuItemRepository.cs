@@ -25,6 +25,7 @@ namespace TakeAwayExample2.DataAccess.Repository
             obj.MenuItemDescription = menuItem.MenuItemDescription;
             obj.FoodTypeID = menuItem.FoodTypeID;
             obj.MenuItemPrice = menuItem.MenuItemPrice;
+            obj.MenuItemImage = menuItem.MenuItemImage;
 
             if (menuItem.MenuItemImage != null)
             {

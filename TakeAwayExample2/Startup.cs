@@ -39,6 +39,9 @@ namespace TakeAwayExample2
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMvc(options => options.EnableEndpointRouting = false)
+                .AddRazorPagesOptions(options => {
+                    options.Conventions.AddPageRoute("/Customer/Home/Index", ""); //To make custom home page need to add this and delete the default page
+                })
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
