@@ -30,11 +30,18 @@ namespace TakeAwayExample2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Context for identity, so EF only create the indenty tables.
+            //We using same connection string because want to add these tables to same DB
+            services.AddDbContext<LoginDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("TakeAwayDBConnection")));
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<LoginDbContext>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TakeAwayDBConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
