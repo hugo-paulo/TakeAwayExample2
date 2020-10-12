@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TakeAwayExample2.Models.ViewModels;
+using TakeAwayExample2.Models;
 
 namespace TakeAwayExample2.DataAccess
 {

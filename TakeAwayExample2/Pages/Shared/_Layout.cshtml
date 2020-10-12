@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@*Bring in the utility namespace for the admin html rendering*@
+@using TakeAwayExample2.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,18 +37,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
 
-                        <!--The drop dow list for our new links-->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
-                                Admin
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-page="/Admin/Category/Index">Category</a>
-                                <a class="dropdown-item" asp-page="/Admin/FoodType/Index">Food Type</a>
-                                <a class="dropdown-item" asp-page="/Admin/MenuItem/Index">Menu Item</a>
-                                <a class="dropdown-item" asp-page="/Admin/User/Index">User</a>
-                            </div>
-                        </li>
+                        @if (User.IsInRole(SD.ManagerRole))
+                        {
+                            <!--The drop dow list for our new links-->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
+                                    Admin
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-page="/Admin/Category/Index">Category</a>
+                                    <a class="dropdown-item" asp-page="/Admin/FoodType/Index">Food Type</a>
+                                    <a class="dropdown-item" asp-page="/Admin/MenuItem/Index">Menu Item</a>
+                                    <a class="dropdown-item" asp-page="/Admin/User/Index">User</a>
+                                </div>
+                            </li>
+                        }
 
                     </ul>
                 </div>

@@ -37,7 +37,8 @@
                         <label asp-for="MenuItemObj.MenuItem.MenuItemImage"></label>
                     </div>
                     <div class="col-9">
-                        <input asp-for="MenuItemObj.MenuItem.MenuItemImage" type="file" class="form-control" name="files" id="uploadBox" />
+                        <input asp-for="MenuItemObj.MenuItem.MenuItemImage" type="file" class="form-control" name="files" id="uploadBox" accept="image/*" />
+                        <!--The accept will not prevent user form putting a different file type but will only show image types when selecting, for limiting image types use "images/png, images/jpg"-->
                     </div>
                 </div>
                 <div class="form-group row">

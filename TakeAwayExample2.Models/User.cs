@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace TakeAwayExample2.Models.ViewModels
+namespace TakeAwayExample2.Models
 {
     public class User : IdentityUser
     {
@@ -14,6 +14,6 @@ namespace TakeAwayExample2.Models.ViewModels
         public string LastName { get; set; }
 
         [NotMapped]
-        public string FullName { get; set; }
+        public string FullName { get { return FirstName + " " + LastName; } }
     }
 }

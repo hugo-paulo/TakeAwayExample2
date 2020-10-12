@@ -10,11 +10,11 @@ namespace TakeAwayExample2.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly ApplicationDbContext _context;
+        protected readonly DbContext _context;
         //This is a internal class
         internal DbSet<T> _dbSet;
 
-        public Repository(ApplicationDbContext context)
+        public Repository(DbContext context)
         {
             _context = context;
             this._dbSet = context.Set<T>();

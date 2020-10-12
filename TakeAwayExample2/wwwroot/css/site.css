@@ -98,3 +98,11 @@ body {
     border-radius: 5px;
     width: 100%;
 }
+
+/*Removes the border around the image upload, the id can only be seen when the element is inspected*/
+#uploadBox {
+    border: none;
+}
+
+/*Note the dropdown list from the form group background color on hover is blue is result of OS*/
+/*need to apply an inset box shadow*/

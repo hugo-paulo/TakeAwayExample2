@@ -15,6 +15,9 @@ using TakeAwayExample2.DataAccess;
 using TakeAwayExample2.DataAccess.Repository.IRepository;
 using TakeAwayExample2.DataAccess.Repository;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using TakeAwayExample2.Utility;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace TakeAwayExample2
 {
@@ -36,14 +39,19 @@ namespace TakeAwayExample2
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TakeAwayDBConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<LoginDbContext>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TakeAwayDBConnection")));
 
+            services.AddSingleton<IEmailSender, EmailSender>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //services.AddScoped<IDbSetInitializer, DbSetInitializer>();
 
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .AddRazorPagesOptions(options => {

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using Stripe;
 using TakeAwayExample2.DataAccess.Repository.IRepository;
 using TakeAwayExample2.Utility;
 
@@ -13,11 +15,11 @@ namespace TakeAwayExample2.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Roles = SD.ManagerRole)]
-    public class FoodTypeController : Controller
+    public class UserController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public FoodTypeController(IUnitOfWork unitOfWork)
+        public UserController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -25,23 +27,23 @@ namespace TakeAwayExample2.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.FoodType.GetAll() });
+            return Json(new { data = _unitOfWork.User.GetAll() });
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpPost]
+        public IActionResult LockUnlock([FromBody] string id)
         {
-            var obj = _unitOfWork.FoodType.GetFirstOrDefault(f => f.FoodTypeID == id);
+            var obj = _unitOfWork.User.GetFirstOrDefault(u => u.Id == id);
 
             if (obj == null)
             {
-                return Json(new { success = false, message = "Error occured while deleting" });
+                return Json(new { success = false, message = "Error while Locking/Unlocking" });
             }
 
-            _unitOfWork.FoodType.DeleteItem(obj);
-            _unitOfWork.Save();
+            //Method that checks if user has not been locked out
+            _unitOfWork.User.LoginGracePeriod(obj);
 
-            return Json(new { success = true, message = "Item deleted successfully" });
+            return Json(new { success = true, message = "Operation successful" });
         }
 
     }

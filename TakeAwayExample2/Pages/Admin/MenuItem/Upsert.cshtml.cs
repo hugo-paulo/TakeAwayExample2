@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -69,7 +70,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
                 string fileName = Guid.NewGuid().ToString();
 
                 var uploads = Path.Combine(webRootPath, @"images\menuItems");
-                var extension = Path.GetExtension(files[0].FileName);
+                var extension = Path.GetExtension(files[0].FileName);                 
 
                 using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                 {
@@ -93,6 +94,13 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
 
                     var uploads = Path.Combine(webRootPath, @"images\menuItems");
                     var extension = Path.GetExtension(files[0].FileName);
+
+                    //Can put a function inside the if statement that returns a bool that checks a list of valid extensions
+                    if (!IsValidExention(extension))//extension != ".jpg")
+                    {
+                        //how to return a error
+                        return RedirectToPage("./Error");
+                    }
 
                     var imagePath = Path.Combine(webRootPath, obj.MenuItemImage.TrimStart('\\'));
 
@@ -135,5 +143,18 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
             return Regex.Replace(userInput, "<.*?>", string.Empty);
         }
 
+        private bool IsValidExention(string ext)
+        {
+            string[] validExentions = { ".jpg", ".jpeg", ".png" };
+            bool result = false;
+
+            foreach (var extension in validExentions)
+            {
+                result = extension.Contains(ext);
+                if (result) break; //exit on match
+            }
+
+            return result;
+        }
     }
 }

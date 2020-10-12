@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TakeAwayExample2.DataAccess.Repository.IRepository;
+using TakeAwayExample2.Utility;
 
 namespace TakeAwayExample2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = SD.ManagerRole)]
     public class MenuItemController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

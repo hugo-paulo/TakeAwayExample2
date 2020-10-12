@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TakeAwayExample2.Models;
+using TakeAwayExample2.Utility;
 
 namespace TakeAwayExample2.Areas.Identity.Pages.Account
 {
@@ -23,17 +25,22 @@ namespace TakeAwayExample2.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        //Used in startup file when services.AddIdentity is run
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -60,6 +67,14 @@ namespace TakeAwayExample2.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            //Additional properties (custom) from the User model
+            [Required]
+            public string FirstName { get; set; }
+            [Required]
+            public string LastName { get; set; }
+            [Required]
+            public string PhoneNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -70,14 +85,58 @@ namespace TakeAwayExample2.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            //Gets the input from the Register form, the drpUserRole comes from the html tag name attribute
+            string role = Request.Form["drpUserRole"].ToString();
+
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                //Assigning the the User model properties (the default was IdentityUser)
+                var user = new User { 
+                    UserName = Input.Email, 
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    PhoneNumber = Input.PhoneNumber
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+                //Checking if the role exists (however why is this needed because have fixed list?)
+                if (!await _roleManager.RoleExistsAsync(SD.ManagerRole))
+                {
+                    _roleManager.CreateAsync(new IdentityRole(SD.ManagerRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.FrontDeskRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.KitchenRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.CustomerRole)).GetAwaiter().GetResult();
+                }
+
                 if (result.Succeeded)
                 {
+                    if (result.Succeeded)
+                    {
+                        if (role == SD.KitchenRole)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.KitchenRole);
+                        }
+                        else if (role == SD.ManagerRole)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.ManagerRole);
+                        }
+                        else if (role == SD.FrontDeskRole)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.FrontDeskRole);
+                        }
+                        else
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.CustomerRole);
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+
+                            return LocalRedirect(returnUrl);
+                        }
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
