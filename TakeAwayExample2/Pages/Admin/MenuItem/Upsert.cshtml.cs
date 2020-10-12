@@ -70,7 +70,14 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
                 string fileName = Guid.NewGuid().ToString();
 
                 var uploads = Path.Combine(webRootPath, @"images\menuItems");
-                var extension = Path.GetExtension(files[0].FileName);                 
+                var extension = Path.GetExtension(files[0].FileName);
+
+                //Can put a function inside the if statement that returns a bool that checks a list of valid extensions
+                if (!IsValidExention(extension))//extension != ".jpg")
+                {
+                    //how to return a error message, how to return reason for error
+                    return RedirectToPage("./Error");
+                }
 
                 using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                 {
@@ -98,7 +105,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
                     //Can put a function inside the if statement that returns a bool that checks a list of valid extensions
                     if (!IsValidExention(extension))//extension != ".jpg")
                     {
-                        //how to return a error
+                        //how to return a error message, how to return reason for error
                         return RedirectToPage("./Error");
                     }
 
