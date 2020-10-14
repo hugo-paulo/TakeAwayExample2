@@ -77,6 +77,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
                 {
                     //how to return a error message, how to return reason for error
                     return RedirectToPage("./Error");
+                    //ModelState.AddModelError("MenuItem", "The uploaded file can only be jpg, jpeg or png.");
                 }
 
                 using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
@@ -107,6 +108,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
                     {
                         //how to return a error message, how to return reason for error
                         return RedirectToPage("./Error");
+                        //ModelState.AddModelError("MenuItem", "The uploaded file can only be jpg, jpeg or png.");
                     }
 
                     var imagePath = Path.Combine(webRootPath, obj.MenuItemImage.TrimStart('\\'));
