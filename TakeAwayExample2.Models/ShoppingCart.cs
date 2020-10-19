@@ -18,6 +18,7 @@ namespace TakeAwayExample2.Models
         public int MenuItemID { get; set; }
         public string UserID { get; set; }
         [Range(1, 100, ErrorMessage = "Sorry we cannot process more than 100 items")]
+        [Display(Name = "Item Count")]
         public int ItemCount { get; set; }
 
         //Navigation properties

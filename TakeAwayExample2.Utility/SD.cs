@@ -9,5 +9,7 @@ namespace TakeAwayExample2.Utility
         public const string FrontDeskRole = "Front Desk";
         public const string KitchenRole = "Kitchen";
         public const string CustomerRole = "Customer";
+
+        public const string ShoppingCart = "ShoppingCart";
     }
 }

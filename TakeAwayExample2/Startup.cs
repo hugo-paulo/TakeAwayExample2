@@ -53,6 +53,16 @@ namespace TakeAwayExample2
 
             //services.AddScoped<IDbSetInitializer, DbSetInitializer>();
 
+            //can also add a file upload limit here
+
+            //We add session so that we can keep the shopping cart items in memory
+            //Adding Sessions to the project
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .AddRazorPagesOptions(options => {
                     options.Conventions.AddPageRoute("/Customer/Home/Index", ""); //To make custom home page need to add this and delete the default page
@@ -89,6 +99,9 @@ namespace TakeAwayExample2
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //call the session method that we set up
+            app.UseSession();
 
             //Dont need this default when using mvc?
             //app.UseRouting();

@@ -9,6 +9,7 @@ namespace TakeAwayExample2.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         IFoodTypeRepository FoodType { get; }
         IMenuItemRepository MenuItem { get; }
+        IShoppingCartRepository ShoppingCart { get; }
         IUserRepository User { get; }
 
         void Save();

@@ -5,25 +5,39 @@
 
 <div class="">
     <form method="post">
+
+        @*Need to have a hidden field to carry the value of MenuItemID*@
+        <input type="hidden" asp-for="ShoppingCartObj.MenuItemID" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="container">
             <div class="">
-                <h1 class="text-primary">Cake</h1>
+                <h1 class="text-primary">@Model.ShoppingCartObj.MenuItem.MenuItemName</h1>
+                <h3 class="text-primary">@Model.ShoppingCartObj.MenuItem.Category.CategoryName</h3>
             </div>
             <div class="row">
                 <div class="col my-1">
-                    <img src="~/images/menuItems/5b263d92-572c-4943-9017-500b79b9d3ac.jpg" style="width: 400px;" class="my-2" />
-                    <h3>Desert</h3>
-                    <span class="badge badge-success p-2">Veg</span>
-                    <p><em>Count:</em> 10</p>
-                    <!-- Maybe add an inStock color green==true/red==false -->
-                    <h3>$10</h3>
-                    <div type="submit" class="btn btn-primary" style="height:40px;">Add to Cart</div>
-                    <a class="btn btn-dark text-white" style="height:40px;">Back to List</a>
+                    <img src="@Model.ShoppingCartObj.MenuItem.MenuItemImage" style="width: 400px;" class="my-2" />
+                    <div class="row mx-1">
+                        <span class="badge badge-success p-2 my-2">@Model.ShoppingCartObj.MenuItem.FoodType.FoodTypeName</span>
+                    </div>
+                    <h3>@Model.ShoppingCartObj.MenuItem.MenuItemPrice.ToString("c")</h3>
+                    <div class="form-group">
+                        <label asp-for="ShoppingCartObj.ItemCount" class="h4"></label>
+                        <input style="border: 1px solid lightgray; margin-left: 10px;" type="number" asp-for="ShoppingCartObj.ItemCount" />
+                        <span asp-validation-for="ShoppingCartObj.ItemCount" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="height:40px;">Add to Cart</button>
+                    <a class="btn btn-dark text-white" style="height:40px;" asp-page="./Index">Back to List</a>
                 </div>
                 <div class="col my-1">
-                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porttitor enim velit, eu ultricies enim iaculis sed. Nunc elit ligula, consectetur eget nibh quis, ultrices malesuada sapien. Duis vel ultricies massa. Sed pulvinar est ut venenatis fringilla. Quisque imperdiet tellus eu ante eleifend, quis condimentum risus ullamcorper. Etiam magna lectus, malesuada eu dui interdum, sodales sodales orci. Mauris blandit lacus diam, non tempor leo eleifend ut. Donec rhoncus velit nec vulputate aliquam. Phasellus et pretium nibh. Aliquam aliquet odio sed magna iaculis vehicula. Fusce ullamcorper luctus suscipit. Suspendisse vestibulum ut felis a tincidunt.</p>
+                    <p>@Model.ShoppingCartObj.MenuItem.MenuItemDescription</p>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+@section Scripts{
+    <!--This tells this page to use the jquery validation script, if we go to this page we'll see the jquery scripts-->
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -18,12 +18,14 @@ namespace TakeAwayExample2.DataAccess.Repository
             Category = new CategoryRepository(_ctx);
             FoodType = new FoodTypeRepository(_ctx);
             MenuItem = new MenuItemRepository(_ctx);
+            ShoppingCart = new ShoppingCartRepository(_ctx);
             User = new UserRepository(_loginCtx);
         }
 
         public ICategoryRepository Category { get; private set; }
         public IFoodTypeRepository FoodType { get; private set; }
         public IMenuItemRepository MenuItem { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
         public IUserRepository User { get; private set; }
 
         public void Dispose()

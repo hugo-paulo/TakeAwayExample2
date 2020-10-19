@@ -23,12 +23,12 @@
                                             <div class="pl-3 pt-1">
                                                 <h3 class="card-title text-primary">@menuItem.MenuItemName</h3>
                                             </div>
+                                            <img src="@menuItem.MenuItemImage" class="card-img p-2" />
                                             <div class="d-flex justify-content-between form-control" style="border: 0px;">
                                                 <div class="col-6 badge">@menuItem.Category.CategoryName</div>
                                                 <div class="col-6 h6">$@menuItem.MenuItemPrice</div>
                                             </div>
-                                            <img src="@menuItem.MenuItemImage" class="card-img p-2" />
-                                            <a asp-page="Details" class="btn btn-dark text-white" asp-route-id="@menuItem.MenuItemID">Details</a>
+                                            <a asp-page="Details" class="btn btn-primary" asp-route-id="@menuItem.MenuItemID">Details</a>
                                         </div>
                                     </div>
                                 }
