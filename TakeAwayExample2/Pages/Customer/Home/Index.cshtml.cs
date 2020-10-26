@@ -42,16 +42,27 @@ namespace TakeAwayExample2.Pages.Customer.Home
             CategoryList = _unitOfWork.Category.GetAll(null, q => q.OrderBy(c => c.DisplayOrder), null);
 
             //Call function to perform rounding off to 2 decimal places
-            Round_OffPriceValue(MenuItemList);
-        }
-
-        void Round_OffPriceValue(IEnumerable<MenuItem> MenuItemList)
-        {
-            //Goes the MenuItemList and rounds of the price to 2 decimal using bankers rounding
-            foreach (var menuItem in MenuItemList)
+            //Round_OffPriceValue(MenuItemList);
+            //An Alternative to the above so that we can reuse this method
+            foreach (var item in MenuItemList)
             {
-                menuItem.MenuItemPrice = Decimal.Round(menuItem.MenuItemPrice, 2);
+                Round_OffPriceValue(item);
             }
         }
+
+        
+        void Round_OffPriceValue(MenuItem menuItem)
+        {
+            menuItem.MenuItemPrice = Decimal.Round(menuItem.MenuItemPrice, 2);
+        }
+
+        //void Round_OffPriceValue(IEnumerable<MenuItem> MenuItemList)
+        //{
+        //    //Goes the MenuItemList and rounds of the price to 2 decimal using bankers rounding
+        //    foreach (var menuItem in MenuItemList)
+        //    {
+        //        menuItem.MenuItemPrice = Decimal.Round(menuItem.MenuItemPrice, 2);
+        //    }
+        //}
     }
 }

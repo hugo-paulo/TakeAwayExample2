@@ -24,8 +24,4 @@
     <ProjectReference Include="..\TakeAwayExample2.Models\TakeAwayExample2.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Customer\Cart\" />
-  </ItemGroup>
-
 </Project>

@@ -19,6 +19,8 @@ namespace TakeAwayExample2.DataAccess.Repository
             FoodType = new FoodTypeRepository(_ctx);
             MenuItem = new MenuItemRepository(_ctx);
             ShoppingCart = new ShoppingCartRepository(_ctx);
+            OrderHeader = new OrderHeaderRepository(_ctx);
+            OrderDetail = new OrderDetailRepository(_ctx);
             User = new UserRepository(_loginCtx);
         }
 
@@ -26,6 +28,8 @@ namespace TakeAwayExample2.DataAccess.Repository
         public IFoodTypeRepository FoodType { get; private set; }
         public IMenuItemRepository MenuItem { get; private set; }
         public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IOrderHeaderRepository OrderHeader { get; set; }
+        public IOrderDetailRepository OrderDetail { get; set; }
         public IUserRepository User { get; private set; }
 
         public void Dispose()

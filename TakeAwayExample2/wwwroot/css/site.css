@@ -104,5 +104,13 @@ body {
     border: none;
 }
 
+
+.cart-button-group {
+    background-color: white;
+    border: hidden;
+    padding: 0px;
+}
+
+
 /*Note the dropdown list from the form group background color on hover is blue is result of OS*/
 /*need to apply an inset box shadow*/
