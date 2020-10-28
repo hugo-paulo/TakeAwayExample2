@@ -39,10 +39,10 @@ namespace TakeAwayExample2.Models
 
         public string Coments { get; set; }
 
-        [Display(Name = "Pickup Name")]
+        [Display(Name = "Name")]
         public string PickupName { get; set; }
 
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Phone No.")]
         public string PickupPhoneNumer { get; set; }
 
         public string TransactionID { get; set; } //on the DB is this a key? (currently not FK)

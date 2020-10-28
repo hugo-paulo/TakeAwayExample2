@@ -32,43 +32,43 @@
                                         </h4>
                                     </div>
                                     <div class="row my-1">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <label asp-for="@Model.detailCart.OrderHeader.PickupName"></label>
                                         </div>
-                                        <div class="col-9">
-                                            <input id="txtName" type="text" asp-for="@Model.detailCart.OrderHeader.PickupName" class="form-control" />
+                                        <div class="col-8">
+                                            <input id="txtName" type="text" asp-for="@Model.detailCart.OrderHeader.PickupName" class="form-control" onblur="validateName(this)" />
                                         </div>
                                     </div>
                                     <div class="row my-1">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <label asp-for="@Model.detailCart.OrderHeader.PickupPhoneNumer"></label>
                                         </div>
-                                        <div class="col-9">
-                                            <input id="txtPhone" type="text" asp-for="@Model.detailCart.OrderHeader.PickupPhoneNumer" class="form-control" />
+                                        <div class="col-8">
+                                            <input id="txtPhone" type="text" asp-for="@Model.detailCart.OrderHeader.PickupPhoneNumer" class="form-control" onblur="validateNumber(this)" />
                                         </div>
                                     </div>
                                     <div class="row my-1">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <label asp-for="@Model.detailCart.OrderHeader.CollectionDate"></label>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <input id="datepicker" value="" type="text" asp-for="@Model.detailCart.OrderHeader.CollectionDate" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="row my-1">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <label asp-for="@Model.detailCart.OrderHeader.CollectionTime"></label>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <input id="timepicker" value="" type="text" asp-for="@Model.detailCart.OrderHeader.CollectionTime" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="row my-1">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <label>Additional Instructions:</label>
                                         </div>
-                                        <div class="col-9">
-                                            <textarea type="text" asp-for="@Model.detailCart.OrderHeader.Coments" style="height: 100px;" class="form-control" ></textarea>
+                                        <div class="col-8">
+                                            <textarea type="text" asp-for="@Model.detailCart.OrderHeader.Coments" style="height: 100px;" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -78,16 +78,25 @@
                                         <span class="text-info">Order Summary:</span>
                                     </h4>
                                     <ul class="list-group mb-3">
+
+                                        @*This will accumilate the total*@
+                                        @{ var total = 0M;}
+
+                                        @foreach (var item in Model.detailCart.ShoppingCartList)
+                                        {
                                         <li class="list-group-item d-flex justify-content-between">
                                             <div>
-                                                <h6 class="my-0">$$Name$$</h6>
-                                                <small class="text-muted">Quantity: $$$COUNT$$$</small>
+                                                <h6 class="my-0">@item.MenuItem.MenuItemName</h6>
+                                                <small class="text-muted">Item(s): @item.ItemCount</small>
                                             </div>
-                                            <span class="text-muted">$$$ PRICE* COUNT $$$)</span>
+                                            <span class="text-muted">@((item.MenuItem.MenuItemPrice * item.ItemCount).ToString("c"))</span>
+                                            @{ total += (item.MenuItem.MenuItemPrice * item.ItemCount); }
                                         </li>
+                                        }
+
                                         <li class="list-group-item d-flex justify-content-between bg-light">
                                             <small class="text-info">Total (USD)</small>
-                                            <strong class="text-info">$$$ORDER TOTAL$$$</strong>
+                                            <strong class="text-info">@total.ToString("c")</strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -97,7 +106,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-12 col-md-4 offset-md-8">
-                                <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
+                                <button type="submit" value="Place Order" class="btn btn-success form-control" onclick="return validateForm()">Place Order</button>
                             </div>
                         </div>
                     </div>
@@ -108,3 +117,10 @@
     }
 
 </form>
+
+@section Scripts{
+
+    <script src="~/js/datePicker.js"></script>
+    <script src="~/js/timePicker.js"></script>
+    <script src="~/js/summaryValidation.js"></script>
+}

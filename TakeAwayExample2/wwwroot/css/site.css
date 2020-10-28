@@ -114,3 +114,9 @@ body {
 
 /*Note the dropdown list from the form group background color on hover is blue is result of OS*/
 /*need to apply an inset box shadow*/
+
+
+.err-asterisk ::after {
+    content: " * ";
+    color: red;
+}
