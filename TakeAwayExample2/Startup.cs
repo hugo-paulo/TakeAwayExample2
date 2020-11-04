@@ -18,6 +18,8 @@ using System.Globalization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using TakeAwayExample2.Utility;
 using Microsoft.EntityFrameworkCore.Internal;
+using System.Configuration;
+using Stripe;
 
 namespace TakeAwayExample2
 {
@@ -62,6 +64,8 @@ namespace TakeAwayExample2
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .AddRazorPagesOptions(options => {
@@ -116,6 +120,8 @@ namespace TakeAwayExample2
             //{
             //    endpoints.MapRazorPages();
             //});
+
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
         }
     }
 }
