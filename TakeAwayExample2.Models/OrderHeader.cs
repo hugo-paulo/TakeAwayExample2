@@ -37,13 +37,13 @@ namespace TakeAwayExample2.Models
 
         public string PaymentStatus { get; set; }
 
-        public string Coments { get; set; }
+        public string Comments { get; set; }
 
         [Display(Name = "Name")]
         public string PickupName { get; set; }
 
         [Display(Name = "Phone No.")]
-        public string PickupPhoneNumer { get; set; }
+        public string PhoneNumer { get; set; }
 
         public string TransactionID { get; set; } //on the DB is this a key? (currently not FK)
     }
