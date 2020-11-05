@@ -24,4 +24,8 @@
     <ProjectReference Include="..\TakeAwayExample2.Models\TakeAwayExample2.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\AppImages\" />
+  </ItemGroup>
+
 </Project>
