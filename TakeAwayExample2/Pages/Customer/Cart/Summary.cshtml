@@ -46,10 +46,10 @@
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-4">
-                                            <label asp-for="@Model.detailCart.OrderHeader.PhoneNumer"></label>
+                                            <label asp-for="@Model.detailCart.OrderHeader.PhoneNumber"></label>
                                         </div>
                                         <div class="col-8">
-                                            <input id="txtPhone" type="text" asp-for="@Model.detailCart.OrderHeader.PhoneNumer" class="form-control" onblur="validateNumber(this)" />
+                                            <input id="txtPhone" type="text" asp-for="@Model.detailCart.OrderHeader.PhoneNumber" class="form-control" onblur="validateNumber(this)" />
                                         </div>
                                     </div>
                                     <div class="row my-1">
@@ -130,7 +130,7 @@
                                                                
                                 <script>
                                     //This hide the default button that Stripe generates
-                                    document.getElementByClassName("stripe-button-el")[0].style.display = "none";
+                                    document.getElementsByClassName("stripe-button-el")[0].style.display = "none";
                                 </script>
                                 
                                 <button type="submit" value="Place Order" class="btn btn-success form-control" onclick="return validateForm()">Place Order</button>

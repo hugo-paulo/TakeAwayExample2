@@ -9,12 +9,13 @@ namespace TakeAwayExample2.Pages.Customer.Cart
 {
     public class OrderConfirmationModel : PageModel
     {
+        //This must match the FK (OrderDetailID) of the OrderDetail table.
         [BindProperty]
-        public int orderId { get; set; }
+        public int OrderDetailID { get; set; }
 
         public void OnGet(int id)
         {
-            orderId = id;
+            OrderDetailID = id;
         }
     }
 }

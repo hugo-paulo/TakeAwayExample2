@@ -43,7 +43,7 @@ namespace TakeAwayExample2.Models
         public string PickupName { get; set; }
 
         [Display(Name = "Phone No.")]
-        public string PhoneNumer { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string TransactionID { get; set; } //on the DB is this a key? (currently not FK)
     }

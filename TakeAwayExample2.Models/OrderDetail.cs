@@ -27,7 +27,7 @@ namespace TakeAwayExample2.Models
 
         public decimal Price { get; set; }
 
-        [ForeignKey("OrderID")]
+        [ForeignKey("OrderHeaderID")]
         public virtual OrderHeader OrderHeader { get; set; }
 
         [ForeignKey("MenuItemID")]

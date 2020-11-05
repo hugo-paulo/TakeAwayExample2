@@ -56,7 +56,7 @@ namespace TakeAwayExample2.Pages.Customer.Cart
 
             detailCart.OrderHeader.PickupName = user.FullName;
             detailCart.OrderHeader.CollectionTime = DateTime.Now;
-            detailCart.OrderHeader.PhoneNumer = user.PhoneNumber;
+            detailCart.OrderHeader.PhoneNumber = user.PhoneNumber;
 
             return Page();
         }
