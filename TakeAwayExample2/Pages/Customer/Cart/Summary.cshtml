@@ -127,8 +127,12 @@
                                         data-locale="auto"
                                         data-allow-remember-me="false"
                                         data-image="https://stripe.com/img/documentation/checkout/marketplace.png"></script>
+                                                               
+                                <script>
+                                    //This hide the default button that Stripe generates
+                                    document.getElementByClassName("stripe-button-el")[0].style.display = "none";
+                                </script>
                                 
-
                                 <button type="submit" value="Place Order" class="btn btn-success form-control" onclick="return validateForm()">Place Order</button>
                             </div>
                         </div>
