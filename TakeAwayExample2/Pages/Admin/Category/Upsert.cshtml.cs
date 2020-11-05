@@ -46,7 +46,7 @@ namespace TakeAwayExample2.Pages.Admin.Category
             }
             else if(CategoryObj.CategoryID == 0)
             {
-                _unitOfWork.Category.AddItem(CategoryObj);
+                _unitOfWork.Category.Add(CategoryObj);
             }
             else
             {

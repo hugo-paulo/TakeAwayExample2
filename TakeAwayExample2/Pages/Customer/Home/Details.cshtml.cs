@@ -49,7 +49,7 @@ namespace TakeAwayExample2.Pages.Customer.Home
                 //If the shopping cart is empty add the selected items to it
                 if (obj == null)
                 {
-                    _unitOfWork.ShoppingCart.AddItem(ShoppingCartObj);
+                    _unitOfWork.ShoppingCart.Add(ShoppingCartObj);
                 }
                 else
                 {

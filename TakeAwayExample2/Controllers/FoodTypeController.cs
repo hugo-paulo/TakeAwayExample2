@@ -38,7 +38,7 @@ namespace TakeAwayExample2.Controllers
                 return Json(new { success = false, message = "Error occured while deleting" });
             }
 
-            _unitOfWork.FoodType.DeleteItem(obj);
+            _unitOfWork.FoodType.Remove(obj);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Item deleted successfully" });

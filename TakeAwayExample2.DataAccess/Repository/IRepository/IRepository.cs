@@ -21,10 +21,12 @@ namespace TakeAwayExample2.DataAccess.Repository.IRepository
             string includedProperties = null
             );
 
-        void AddItem(T entity);
+        void Add(T entity);
 
         void Remove(int id);
 
-        void DeleteItem(T entity);
+        void Remove(T entity);
+
+        void RemoveRange(IEnumerable<T> entity);
     }
 }

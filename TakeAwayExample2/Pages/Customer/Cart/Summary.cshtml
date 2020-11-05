@@ -1,5 +1,10 @@
 ﻿@page
 @model TakeAwayExample2.Pages.Customer.Cart.SummaryModel
+
+@using Microsoft.Extensions.Options
+@*Inject the Stripe api*@
+@inject IOptions<TakeAwayExample2.Utility.StripeSettings> Stripe
+
 @{
 }
 
@@ -41,10 +46,10 @@
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-4">
-                                            <label asp-for="@Model.detailCart.OrderHeader.PickupPhoneNumer"></label>
+                                            <label asp-for="@Model.detailCart.OrderHeader.PhoneNumer"></label>
                                         </div>
                                         <div class="col-8">
-                                            <input id="txtPhone" type="text" asp-for="@Model.detailCart.OrderHeader.PickupPhoneNumer" class="form-control" onblur="validateNumber(this)" />
+                                            <input id="txtPhone" type="text" asp-for="@Model.detailCart.OrderHeader.PhoneNumer" class="form-control" onblur="validateNumber(this)" />
                                         </div>
                                     </div>
                                     <div class="row my-1">
@@ -68,7 +73,7 @@
                                             <label>Additional Instructions:</label>
                                         </div>
                                         <div class="col-8">
-                                            <textarea type="text" asp-for="@Model.detailCart.OrderHeader.Coments" style="height: 100px;" class="form-control"></textarea>
+                                            <textarea type="text" asp-for="@Model.detailCart.OrderHeader.Comments" style="height: 100px;" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -106,6 +111,24 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-12 col-md-4 offset-md-8">
+
+                                @{
+                                    //Sends the order total to the Stripe server in the format of cents
+                                    var OrderTotalForStripe = Model.detailCart.OrderHeader.OrderTotal * 100;
+                                }
+
+                                <script src="https://checkout.stripe.com/checkout.js"
+                                        class="stripe-button"
+                                        data-key="@Stripe.Value.PublishableKey"
+                                        data-amount="@OrderTotalForStripe"
+                                        data-name="Take Away App"
+                                        data-label="Place Order"
+                                        data-description="Stripe Test for the Take Away App"
+                                        data-locale="auto"
+                                        data-allow-remember-me="false"
+                                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"></script>
+                                
+
                                 <button type="submit" value="Place Order" class="btn btn-success form-control" onclick="return validateForm()">Place Order</button>
                             </div>
                         </div>

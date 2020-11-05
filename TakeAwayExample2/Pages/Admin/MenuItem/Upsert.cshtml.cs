@@ -87,7 +87,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
 
                 MenuItemObj.MenuItem.MenuItemImage = @"\images\menuItems\" + fileName + extension;
 
-                _unitOfWork.MenuItem.AddItem(MenuItemObj.MenuItem);
+                _unitOfWork.MenuItem.Add(MenuItemObj.MenuItem);
             }
             else
             {

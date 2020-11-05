@@ -45,7 +45,7 @@ namespace TakeAwayExample2.Pages.Admin.FoodType
             }
             else if (FoodTypeObj.FoodTypeID == 0)
             {
-                _unitOfWork.FoodType.AddItem(FoodTypeObj);
+                _unitOfWork.FoodType.Add(FoodTypeObj);
             }
             else
             {

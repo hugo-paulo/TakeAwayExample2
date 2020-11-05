@@ -20,7 +20,7 @@ namespace TakeAwayExample2.DataAccess.Repository
             this._dbSet = context.Set<T>();
         }
 
-        public void AddItem(T entity)
+        public void Add(T entity)
         {
             _dbSet.Add(entity);
         }
@@ -85,12 +85,17 @@ namespace TakeAwayExample2.DataAccess.Repository
         {
             T entityToRemove = _dbSet.Find(id);
             //Good use of function overloading (convert the argument and call the generic function)
-            DeleteItem(entityToRemove);
+            Remove(entityToRemove);
         }
 
-        public void DeleteItem(T entity)
+        public void Remove(T entity)
         {
             _dbSet.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<T> entity)
+        {
+            _dbSet.RemoveRange(entity);
         }
     }
 }

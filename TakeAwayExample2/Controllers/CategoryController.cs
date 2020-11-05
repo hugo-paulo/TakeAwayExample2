@@ -35,7 +35,7 @@ namespace TakeAwayExample2.Controllers
                 return Json(new { success = false, message = "Error occured while deleting" });
             }
 
-            _unitOfWork.Category.DeleteItem(obj);
+            _unitOfWork.Category.Remove(obj);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Item deleted successfully" });

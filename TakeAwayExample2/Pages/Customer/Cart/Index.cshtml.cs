@@ -129,7 +129,7 @@ namespace TakeAwayExample2.Pages.Customer.Cart
         //An Alernate ?
         void DeleteItemFromCart(ShoppingCart cart)
         {
-            _unitOfWork.ShoppingCart.DeleteItem(cart);
+            _unitOfWork.ShoppingCart.Remove(cart);
             _unitOfWork.Save();
         }
 

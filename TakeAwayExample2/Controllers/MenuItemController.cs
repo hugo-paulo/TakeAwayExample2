@@ -51,7 +51,7 @@ namespace TakeAwayExample2.Controllers
                     System.IO.File.Delete(imagePath);
                 }
 
-                _unitOfWork.MenuItem.DeleteItem(obj);
+                _unitOfWork.MenuItem.Remove(obj);
                 _unitOfWork.Save();
             }
             catch (Exception ex)
