@@ -1,18 +1,22 @@
 ﻿@page
 @model TakeAwayExample2.Pages.Customer.Cart.OrderConfirmationModel
+
+@section orderDetailStyle{
+    <link href="~/css/orderDetailStyle.css" rel="stylesheet" />
+}
+
 @{
 }
 
 <div class="container row">
     <div class="col-12 text-center">
-        <h1 class="text-primary text-center">Order Placed Successfully!</h1>
+        <!--change to the green color-->
+        <h1 class="text-center" style="color: #8fbc8f;">Order Placed Successfully!</h1>
         <p>Your Order Number is: @Model.OrderDetailID</p>
-        <br />
-        <img src="~/images/AppImages/food share-photo.jpeg" style="width: 65%;" />
     </div>
-    <div>
-        <p>Your order has been placed successfully!</p>
-        <br />
-        <p>We looking forward to seeing you.</p>
+    <br />
+    <div class="col-12 text-center image-container">
+        <img src="~/images/AppImages/food share-photo.jpeg" />
+        <p id="thank-u-message">We looking forward to seeing you.</p>
     </div>
 </div>
