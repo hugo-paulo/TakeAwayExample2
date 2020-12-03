@@ -31,6 +31,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItemBatch
         *This is done so that the GetAll is called only once, rather than calling it in loop when checking for the keys
         */
         private List<Models.Category> categoryList = new List<Models.Category>();
+        private List<Models.FoodType> foodTypeList = new List<Models.FoodType>();
         //This must be called before we execute the excel reader
 
         public void OnGet()
@@ -52,6 +53,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItemBatch
             }
 
             addToCategoriesList();
+            addToFoodTypeList();
             executeExcelReader(fileName);
         }
                 
@@ -61,6 +63,14 @@ namespace TakeAwayExample2.Pages.Admin.MenuItemBatch
             foreach (var item in _unitOfWork.Category.GetAll())
             {
                 categoryList.Add(item);
+            }
+        }
+
+        private void addToFoodTypeList()
+        {
+            foreach (var item in _unitOfWork.FoodType.GetAll())
+            {
+                foodTypeList.Add(item);
             }
         }
 
@@ -93,13 +103,25 @@ namespace TakeAwayExample2.Pages.Admin.MenuItemBatch
         }
 
         //This works similar to getCategoryKey method
-        private int getFoodTypeKey(string foodTypeName = "")
+        private int getFoodTypeKey(string foodTypeName = "Meat")
         {
-            throw new NotImplementedException();
+            foodTypeName = nameSanitizer(foodTypeName);
+
+            var F = foodTypeList.Where(f => f.FoodTypeName == foodTypeName);
+
+            if (F.Count() == 0)
+            {
+                createFoodType(foodTypeName);
+                getFoodTypeKey(foodTypeName);
+            }
+
+            int pk = F.Single().FoodTypeID;
+            return pk;
         }
 
         private int getCategoryKey(string cateroryName = "test 2") //this is the correct signature
         {
+            cateroryName = nameSanitizer(cateroryName);
             //Gets the category object for the list
             var C = categoryList.Where(c => c.CategoryName == cateroryName);
             
@@ -124,6 +146,32 @@ namespace TakeAwayExample2.Pages.Admin.MenuItemBatch
             catObj.CategoryName = categoryName;
             catObj.DisplayOrder = 1;//need to figure a way to dynamicallly adjust this
             _unitOfWork.Category.Add(catObj);
+        }
+
+        private void createFoodType(string foodTypeName)
+        {
+            var cartObj = new Models.FoodType();
+            cartObj.FoodTypeName = foodTypeName;
+            _unitOfWork.FoodType.Add(cartObj);
+        }
+
+        //do sanitize check that makes the first letter capital
+        private string nameSanitizer(string name)
+        {
+            //Checks if the first letter of the string is capital
+            if (!char.IsUpper(name[0]))
+            {
+                //Changes the first char in the string chanes it to upper, 
+                //then concat this char to the string minus its first char(the one we changed) 
+                name = name.First().ToString().ToUpper() + name.Substring(1).ToLower();
+            }
+            else
+            {
+                //Excludes the first char because it's already capitalised and the rest is lowercased
+                name = name.Substring(0, 1) + name.Substring(1).ToLower();
+            }            
+
+            return name;
         }
     }
 }
