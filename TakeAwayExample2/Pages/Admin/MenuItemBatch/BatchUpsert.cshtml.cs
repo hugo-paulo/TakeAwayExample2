@@ -112,6 +112,8 @@ namespace TakeAwayExample2.Pages.Admin.MenuItemBatch
             if (F.Count() == 0)
             {
                 createFoodType(foodTypeName);
+                //Need to update the list after we create a new entry in DB (remember not reading directly from DB)
+                addToFoodTypeList();
                 getFoodTypeKey(foodTypeName);
             }
 
@@ -129,6 +131,8 @@ namespace TakeAwayExample2.Pages.Admin.MenuItemBatch
             if (C.Count() == 0)
             {
                 createCategory(cateroryName);
+                //Need to update the list after we create a new entry in DB (remember not reading directly from DB)
+                addToCategoriesList();
                 //Calls this function again to get the category PK
                 getCategoryKey(cateroryName);
             }
