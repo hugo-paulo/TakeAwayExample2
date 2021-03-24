@@ -31,8 +31,6 @@ namespace TakeAwayExample2.DataAccess.Repository
             var obj = _ctx.FoodType.FirstOrDefault(f => f.FoodTypeID == foodType.FoodTypeID);
 
             obj.FoodTypeName = foodType.FoodTypeName;
-
-            _ctx.SaveChanges();
         }
     }
 }

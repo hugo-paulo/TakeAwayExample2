@@ -13,7 +13,7 @@ namespace TakeAwayExample2.DataAccess.Repository
 
         public OrderHeaderRepository(ApplicationDbContext ctx) : base(ctx)
         {
-            ctx = _ctx;
+            _ctx = ctx;
         }
 
         public void UpdateItem(OrderHeader orderHeader)
@@ -21,8 +21,6 @@ namespace TakeAwayExample2.DataAccess.Repository
             var obj = _ctx.OrderHeader.FirstOrDefault(o => o.OrderHeaderID == orderHeader.OrderHeaderID);
 
             _ctx.OrderHeader.Update(obj);
-
-            _ctx.SaveChanges();
         }
     }
 }

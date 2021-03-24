@@ -86,6 +86,8 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
                 }
 
                 MenuItemObj.MenuItem.MenuItemImage = @"\images\menuItems\" + fileName + extension;
+                //Remove the Html tags when creating the MenuItem
+                MenuItemObj.MenuItem.MenuItemDescription = InputSanitize(MenuItemObj.MenuItem.MenuItemDescription);
 
                 _unitOfWork.MenuItem.Add(MenuItemObj.MenuItem);
             }
@@ -135,7 +137,7 @@ namespace TakeAwayExample2.Pages.Admin.MenuItem
                     MenuItemObj.MenuItem.MenuItemImage = obj.MenuItemImage;
                 }
 
-                //Sanitize the user input (we should use this for all input)
+                //Sanitize the user MenuItem input on Update (we should use this for all input)
                 MenuItemObj.MenuItem.MenuItemDescription = InputSanitize(MenuItemObj.MenuItem.MenuItemDescription);
 
                 _unitOfWork.MenuItem.UpdateItem(MenuItemObj.MenuItem);

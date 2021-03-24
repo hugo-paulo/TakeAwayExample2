@@ -30,8 +30,6 @@ namespace TakeAwayExample2.DataAccess.Repository
             {
                 obj.MenuItemImage = menuItem.MenuItemImage;
             }
-
-            _ctx.SaveChanges();
         }
     }
 }

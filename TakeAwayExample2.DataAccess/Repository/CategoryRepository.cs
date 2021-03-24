@@ -32,8 +32,6 @@ namespace TakeAwayExample2.DataAccess.Repository
 
             obj.CategoryName = category.CategoryName;
             obj.DisplayOrder = category.DisplayOrder;
-
-            _ctx.SaveChanges();
         }
     }
 }
